@@ -1255,7 +1255,7 @@ define pcodeop __spu_cgth;
 define pcodeop __spu_cgthi;
 
 # cgthi rt,ra,value
-:cgthi RI10_RT,RI10_RA,RI10_I10 is RI10_OP=115 & RI10_RT & RI10_RA & RI10_I10
+:cgthi RI10_RT,RI10_RA,RI10_I10 is RI10_OP=77 & RI10_RT & RI10_RA & RI10_I10
 {
 	RI10_RT = __spu_cgthi(RI10_RA, RI10_I10:4);
 }
@@ -1745,7 +1745,7 @@ define pcodeop __spu_dsync;
 # dsync
 :dsync is RR_OP=3
 {
-	__spu_dsync();	
+	__spu_dsync();
 }
 
 #mfspr
