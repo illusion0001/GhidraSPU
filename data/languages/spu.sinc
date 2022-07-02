@@ -142,7 +142,7 @@ attach variables [ CH_CA ]
 # we know that the LSA must be 16 bytes aligned, but it f*s up the decompiler output
 #LSA: symbol(RI10_RA)	is RI10_I10 & RI10_RA [ symbol = RI10_I10 << 4; ] { tmp:4 = (symbol + RI10_RA) & 0xFFFFFFF0;export tmp; }
 LSA: symbol(RI10_RA)	is RI10_I10 & RI10_RA [ symbol = RI10_I10 << 4; ] { tmp:4 = trunc(symbol + RI10_RA);export tmp; }
-targetAddress: symbol   is RI16_I16 [ symbol = inst_start + (RI16_I16 << 2); ] { export *[ram]:4 symbol; }
+targetAddress: symbol   is RI16_I16 [ symbol = (inst_start + (RI16_I16 << 2)) & 0x3FFFC; ] { export *[ram]:4 symbol; }
 absoluteAddress: symbol   is RI16_I16 [ symbol = (RI16_I16 << 2); ] { export *[ram]:4 symbol; }
 LSAabsolute: symbol  is RI16_I16 [ symbol = (RI16_I16 << 2) & 0x3FFF0; ] { tmp:4 = symbol:4; export tmp; }
 #loadAddress: symbol     is RI18_I18 [ symbol = RI18_I18*1; ] { export *[ram]:8 symbol; }
@@ -1388,7 +1388,7 @@ define pcodeop __spu_clgti;
 }
 
 # bi lr
-:bi RR_RA is RR_OP=424 & RR_RB & RR_RA & RR_RA=0 & RR_RT=0
+:bi RR_RA,BI_ED is RR_OP=424 & RR_RB & RR_RA & RR_RA=0 & RR_RT=0 & BI_ED
 {
 	if (BI_ED:1 == 1) goto <en>;
 	if (BI_ED:1 == 2) goto <dis>;
