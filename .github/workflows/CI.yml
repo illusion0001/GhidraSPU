@@ -29,11 +29,8 @@ jobs:
         with:
           version: ${{ matrix.ghidra }}
 
-      - name: bodge
-        run: chmod +x gradlew
-
       - name: Build Extension
-        run: ./gradlew
+        run: gradle
 
       - name: Upload artifact
         uses: actions/upload-artifact@v3
@@ -55,4 +52,3 @@ jobs:
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
         run: gh release create 1.0${{ GITHUB.RUN_NUMBER }} artifact/*.zip --target ${{ GITHUB.SHA }} -t 1.0${{ GITHUB.RUN_NUMBER }}
-
