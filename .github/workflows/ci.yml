@@ -32,8 +32,7 @@ jobs:
       - name: Upload artifact
         uses: actions/upload-artifact@v3
         with:
-          path: dist/
-          retention-days: 7
+          path: dist/*.zip
 
   push_release:
     needs: build_extension
