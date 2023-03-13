@@ -15,7 +15,7 @@ jobs:
     strategy:
       matrix:
         include:
-          - ghidra: [ '10.2.2', '10.2.3' ]
+          - ghidra: '10.2.2'
             java:   '17'
 
     steps:
